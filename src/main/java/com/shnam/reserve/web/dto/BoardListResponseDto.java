@@ -2,18 +2,20 @@ package com.shnam.reserve.web.dto;
 
 import com.shnam.reserve.domain.board.Board;
 import lombok.Getter;
+import java.time.LocalDateTime;
 
 @Getter
-public class BoardResponseDto {
+public class BoardListResponseDto {
+
     private Long id;
     private String title;
-    private String content;
     private String author;
+    private LocalDateTime modifiedDate;
 
-    public BoardResponseDto(Board entity) {
+    public BoardListResponseDto(Board entity) {
         this.id = entity.getId();
         this.title = entity.getTitle();
-        this.content = entity.getContent();
         this.author = entity.getAuthor();
+        this.modifiedDate = entity.getModifiedDate();
     }
 }

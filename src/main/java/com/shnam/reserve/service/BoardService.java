@@ -2,12 +2,18 @@ package com.shnam.reserve.service;
 
 import com.shnam.reserve.domain.board.Board;
 import com.shnam.reserve.domain.board.BoardRepository;
+import com.shnam.reserve.web.dto.BoardListResponseDto;
 import com.shnam.reserve.web.dto.BoardResponseDto;
 import com.shnam.reserve.web.dto.BoardSaveRequestDto;
 import com.shnam.reserve.web.dto.BoardUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.*;
 
 @RequiredArgsConstructor
 @Service
@@ -33,5 +39,12 @@ public class BoardService {
         Board entity = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
 
         return new BoardResponseDto(entity);
+    }
+
+    @Transactional(readOnly = true)
+    public List<BoardListResponseDto> findAllDesc() {
+        return boardRepository.findAllDesc().stream()
+                .map(BoardListResponseDto::new)
+                .collect(toList());
     }
 }

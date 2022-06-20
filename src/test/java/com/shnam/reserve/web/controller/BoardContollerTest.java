@@ -44,7 +44,7 @@ class BoardContollerTest {
                                                                     .content(content)
                                                                     .author(author)
                                                                     .build();
-        String url = "http://localhost:" + port + "/board";
+        String url = "http://localhost:" + port + "/api/board";
 
         //when
         ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, boardSaveRequestDto, Long.class);
@@ -83,7 +83,7 @@ class BoardContollerTest {
                                                                 .build();
         HttpEntity<BoardUpdateRequestDto> httpEntity = new HttpEntity<>(requestDto);
 
-        String url = "http://localhost:" + port + "/board/" + updateId;
+        String url = "http://localhost:" + port + "/api/board/" + updateId;
 
         //when
         ResponseEntity<Long> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, httpEntity, Long.class);
