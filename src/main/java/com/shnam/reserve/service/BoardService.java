@@ -35,6 +35,13 @@ public class BoardService {
         return board.getId();
     }
 
+    @Transactional
+    public void delete(Long id) {
+        Board board = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
+
+        boardRepository.delete(board);
+    }
+
     public BoardResponseDto findById(Long id) {
         Board entity = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
 

@@ -18,7 +18,16 @@
     <h1>스프링 부트로 시작하는 웹 서비스1</h1>
     <div class="col-md-12">
         <div class="row">
-            <a href="/board/new" role="button" class="btn btn-primary">글 등록</a>
+            <div class="col-md-6">
+                <a th:href="@{/board/new}" role="button" class="btn btn-primary">글 등록</a>
+                <th:block th:if="${not #strings.isEmpty(userName)}">
+                    <span id="user" th:text="${userName}"></span>
+                    <a th:href="@{/logout}" class="btn btn-info active" role="button">Logout</a>
+                </th:block>
+                <th:block th:if="${#strings.isEmpty(userName)}">
+                    <a th:href="@{/oauth2/authorization/google}" class="btn btn-success active" role="button">Google Login</a>
+                </th:block>
+            </div>
         </div>
     </div>
     <br>
@@ -35,7 +44,7 @@
             <tr th:each="board : ${boardList}">
                 <td th:text="${board.id}"></td>
                 <td>
-                    <a th:href="${'/board/edit/' + board.id}" th:text="${board.title}"></a>
+                    <a th:href="@{/board/edit/{id}(id=${board.id})}" th:text="${board.title}"></a>
                 </td>
                 <td th:text="${board.author}"></td>
                 <td th:text="${board.modifiedDate}"></td>
