@@ -17,6 +17,9 @@ spring:
     restart:
       enabled: false
 
+  profiles:
+    include: oauth
+
 logging:
   level:
     org.hibernate.SQL: debug

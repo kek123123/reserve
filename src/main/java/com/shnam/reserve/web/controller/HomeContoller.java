@@ -1,5 +1,6 @@
 package com.shnam.reserve.web.controller;
 
+import com.shnam.reserve.config.auth.LoginUser;
 import com.shnam.reserve.config.auth.dto.SessionUser;
 import com.shnam.reserve.service.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -17,10 +18,9 @@ public class HomeContoller {
     private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model) {
-        model.addAttribute("boardList", boardService.findAllDesc());
+    public String index(Model model, @LoginUser SessionUser user) {
 
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+        model.addAttribute("boardList", boardService.findAllDesc());
 
         if (user != null) {
             model.addAttribute("userName", user.getName());
@@ -28,10 +28,4 @@ public class HomeContoller {
 
         return "index";
     }
-
-    @GetMapping("/test")
-    public String test() {
-        return "test";
-    }
-
 }

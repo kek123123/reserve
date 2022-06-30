@@ -13,6 +13,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +34,7 @@ class BoardContollerTest {
     private BoardRepository boardRepository;
 
     @Test
+    @WithMockUser(roles = "USER")
     public void 글등록() throws Exception {
         //given
         String title = "제목";
